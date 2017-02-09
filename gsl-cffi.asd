@@ -6,8 +6,11 @@
   :license "Specify license here"
   :depends-on (#:alexandria
                #:iterate
-               #:let-plus)
+               #:let-plus
+	       #:cffi)
   :serial t
   :components ((:file "package")
+	       (:file "library")
+	       (:file "version")
                (:file "gsl-cffi")))
 
