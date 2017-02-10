@@ -7,10 +7,13 @@
   :depends-on (#:alexandria
                #:iterate
                #:let-plus
-	       #:cffi)
+	       #:cffi
+	       #:trivial-garbage)
   :serial t
   :components ((:file "package")
 	       (:file "library")
 	       (:file "version")
+	       (:file "error")
+	       (:file "constants")
                (:file "gsl-cffi")))
 

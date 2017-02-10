@@ -4,3 +4,4 @@
 
 ;;; "gsl-cffi" goes here. Hacks and glory await!
 
+(set-error-handler)

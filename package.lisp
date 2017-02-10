@@ -1,8 +1,11 @@
 ;;;; package.lisp
 
 (defpackage #:gsl-cffi
-  (:use #:cl)
+  (:use #:cl #:iterate #:let-plus)
   (:export
    #:version
-   #:unsupported-gsl-version))
+   #:unsupported-gsl-version
+   #:gsl-error)
+  (:nicknames #:gsl))
+
 
