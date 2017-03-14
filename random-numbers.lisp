@@ -151,6 +151,7 @@ automatic garbage collection. Use with random- functions."
 
 
 (defun random-gaussian (rng sigma)
+  (declare (optimize (speed 3)))
   (gsl-ran-gaussian (rng-pointer rng) sigma))
 
 

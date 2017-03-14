@@ -13,7 +13,9 @@
   :components ((:file "package")
 	       (:file "library")
 	       (:file "version")
+	       (:file "utils")
 	       (:file "error")
 	       (:file "constants")
-               (:file "gsl-cffi")))
+               (:file "gsl-cffi")
+	       (:file "random-numbers")))
 

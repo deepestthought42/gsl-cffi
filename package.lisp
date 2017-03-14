@@ -5,7 +5,11 @@
   (:export
    #:version
    #:unsupported-gsl-version
-   #:gsl-error)
-  (:nicknames #:gsl))
+   #:gsl-error
+   #:get-array-random-uniform
+   #:random-uniform
+   #:random-gaussian
+   #:get-random-number-generator
+   #:create-integration-function))
 
 
