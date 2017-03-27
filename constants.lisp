@@ -24,7 +24,8 @@
 		     (error "Unknown error: ~a" ,no)))))
 	 ,@(iter
 	     (for (c no doc) in constants)
-	     (collect `(defconstant ,c ,no ,doc)))))))
+	     (collect `(defconstant ,c ,no ,doc))
+	     (collect `(export ',c)))))))
 
 
 

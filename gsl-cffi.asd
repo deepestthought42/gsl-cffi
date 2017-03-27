@@ -14,8 +14,10 @@
 	       (:file "library")
 	       (:file "version")
 	       (:file "utils")
+	       (:file "base-types")
 	       (:file "error")
 	       (:file "constants")
+	       (:file "multifit")
                (:file "gsl-cffi")
 	       (:file "random-numbers")))
 
