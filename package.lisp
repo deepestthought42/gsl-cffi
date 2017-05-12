@@ -43,6 +43,7 @@
    #:gsl-matrix-get
    #:gsl-matrix-alloc
    #:gsl-matrix-free
-   #:gsl-vector))
+   #:gsl-vector
+   #:with-fdf-solver))
 
 

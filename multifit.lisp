@@ -133,3 +133,36 @@
   (covar matrix))
 
 
+;;;; convenience functionality
+
+
+(defmacro with-fdf-solver ((solver-name no-data-points no-fit-params
+			    fn->fill-initial-gsl-vector f
+			    &key (solver-type 'gsl-cffi:*gsl-multifit-fdfsolver-lmsder*)
+				 (df '(cffi:null-pointer))
+				 (fdf '(cffi:null-pointer))
+				 (params '(cffi:null-pointer)))
+			   &body body)
+  (alexandria:once-only (no-data-points no-fit-params fn->fill-initial-gsl-vector)
+    (alexandria:with-gensyms (initial-vector)
+      `(let ((,solver-name (gsl-cffi:gsl-multifit-fdfsolver-alloc ,solver-type
+								  ,no-data-points
+								  ,no-fit-params))
+	     (,initial-vector (gsl-cffi:gsl-vector-alloc ,no-fit-params)))
+	 (unwind-protect
+	      (cffi:with-foreign-objects ((/fdf/ '(:struct gsl-cffi:fdf-struct)))
+		(cffi:with-foreign-slots ((gsl-cffi:f gsl-cffi:df gsl-cffi:fdf
+						      gsl-cffi:n gsl-cffi:p
+						      gsl-cffi:params)
+					  /fdf/ (:struct gsl-cffi:fdf-struct))
+		  (setf gsl-cffi:f ,f
+			gsl-cffi:df ,df
+			gsl-cffi:fdf ,fdf
+			gsl-cffi:n ,no-data-points
+			gsl-cffi:p ,no-fit-params
+			gsl-cffi:params ,params))
+		(gsl-cffi:gsl-multifit-fdfsolver-set ,solver-name /fdf/
+						     (funcall ,fn->fill-initial-gsl-vector ,initial-vector))
+		(progn ,@body))
+	   (progn (gsl-cffi:gsl-multifit-fdfsolver-free ,solver-name)
+		  (gsl-cffi:gsl-vector-free ,initial-vector)))))))
