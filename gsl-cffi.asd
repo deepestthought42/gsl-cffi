@@ -19,5 +19,6 @@
 	       (:file "constants")
 	       (:file "multifit")
                (:file "gsl-cffi")
+	       (:file "numerical-integration")
 	       (:file "random-numbers")))
 
