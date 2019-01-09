@@ -7,7 +7,7 @@
     ((message :accessor message :initarg :message
 	      :initform "current gsl version is not supported by gsl-cffi.")))
 
-  (defparameter *supported-versions* '(("1.16" gsl-v1-16) ("2.1" gsl-v2-1)))
+  (defparameter *supported-versions* '(("1.16" gsl-v1-16) ("2.1" gsl-v2-1) ("2.4" gsl-v2-4)))
   (cffi:defcvar "gsl_version" :string)
   (defun version () *gsl-version*))
 

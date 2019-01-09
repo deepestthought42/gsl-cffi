@@ -132,22 +132,22 @@
     :double
   (rng :pointer))
 
- 
+
 
 (defstruct rng pointer seed)
 
-(defun get-random-number-generator (type &optional seed)
-  "Return an object of type RNG that acts as a thin layer for
+(let ((g-rng (make-rng :pointer (gsl-rng-alloc *mt19937_1999*))))
+  (defun get-random-number-generator (type &optional seed)
+    "Return an object of type RNG that acts as a thin layer for
 automatic garbage collection. Use with random- functions."
-  (let ((rng (make-rng :pointer
-		     (gsl-rng-alloc type))))
-    (trivial-garbage:finalize rng #'(lambda ()
-				    (gsl-rng-free (rng-pointer rng))))
-    (if seed
-	(progn
-	  (setf (rng-seed rng) seed)
-	  (gsl-rng-set (rng-pointer rng) seed)))
-    rng))
+    (let* ((rng (make-rng :pointer (gsl-rng-alloc type)))
+	   (seed (if seed seed (round (random-uniform g-rng) 0.001))))
+      (trivial-garbage:finalize rng #'(lambda ()
+					(gsl-rng-free (rng-pointer rng))))
+
+      (setf (rng-seed rng) seed)
+      (gsl-rng-set (rng-pointer rng) seed)
+      rng)))
 
 
 (defun random-gaussian (rng sigma)
