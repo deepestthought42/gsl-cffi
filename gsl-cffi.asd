@@ -1,9 +1,10 @@
 ;;;; gsl-cffi.asd
 
 (asdf:defsystem #:gsl-cffi
-  :description "Describe gsl-cffi here"
-  :author "Your Name <your.name@example.com>"
-  :license "Specify license here"
+  :description "Random assortment of GSL functions I need in my own projects."
+  :author "Renee Klawitter <klawitterrenee@gmail.com>"
+  :license "Apache 2.0"
+  :version "0.0.1"
   :depends-on (#:alexandria
                #:iterate
                #:let-plus
